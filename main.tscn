@@ -1,0 +1,124 @@
+[gd_scene load_steps=14 format=3 uid="uid://dmqs8dggqnp35"]
+
+[ext_resource type="Texture2D" uid="uid://728g535ys6dl" path="res://city 5/7.png" id="1_7g7n2"]
+[ext_resource type="Script" path="res://main.gd" id="1_ersoc"]
+[ext_resource type="FontFile" uid="uid://cpghx8e6qjdsk" path="res://Font/W95FA.otf" id="3_hjgyb"]
+[ext_resource type="Texture2D" uid="uid://c3op40uclafpu" path="res://Sprite/minus.png" id="4_o0e6v"]
+[ext_resource type="Texture2D" uid="uid://brdu65fwika6r" path="res://Sprite/plus.png" id="5_ktmup"]
+[ext_resource type="AudioStream" uid="uid://sm5lqyuwbhoh" path="res://Sound/Alarm clock sound.mp3" id="6_de53m"]
+[ext_resource type="Texture2D" uid="uid://c076r6y4exd1b" path="res://Sprite/Start.png" id="6_fn058"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckby1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkura"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4kw62"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_64hhq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1540"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4jdji"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ersoc")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(2000, 1000)
+transform = Transform2D(1, 0, 0, 1, 2000, 1000)
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(4608, 0)
+
+[node name="7" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_7g7n2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -943.0
+offset_right = 960.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
+theme_override_fonts/font = ExtResource("3_hjgyb")
+theme_override_font_sizes/font_size = 300
+text = "00:50"
+
+[node name="Minus" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 321.0
+offset_right = 571.0
+offset_bottom = 250.0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ckby1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bkura")
+icon = ExtResource("4_o0e6v")
+flat = true
+expand_icon = true
+
+[node name="Plus" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1352.0
+offset_right = 1602.0
+offset_bottom = 250.0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4kw62")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_64hhq")
+icon = ExtResource("5_ktmup")
+flat = true
+expand_icon = true
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 660.0
+offset_top = 437.0
+offset_right = 1299.0
+offset_bottom = 784.0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_d1540")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4jdji")
+icon = ExtResource("6_fn058")
+flat = true
+expand_icon = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_left = -304.0
+offset_top = 1237.0
+offset_right = 2066.0
+offset_bottom = 1520.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 75
+theme_override_fonts/font = ExtResource("3_hjgyb")
+theme_override_font_sizes/font_size = 300
+text = "The Timer is finished"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(920, 0)
+stream = ExtResource("6_de53m")
+volume_db = 24.0
+max_distance = 9.22337e+18
+
+[connection signal="pressed" from="CanvasLayer/Control/Minus" to="." method="_on_minus_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Plus" to="." method="_on_plus_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
